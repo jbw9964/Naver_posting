@@ -280,7 +280,7 @@ cython_debug/
 #.idea/
 
 ### VisualStudioCode ###
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -303,5 +303,9 @@ cython_debug/
 
 # Ignore code-workspaces
 *.code-workspace
+
+practice C/
+practice Jupyter/
+practice Python/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,c++,c,jupyternotebooks,macos

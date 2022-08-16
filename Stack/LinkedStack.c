@@ -16,11 +16,7 @@ Stack CreateStack()
 
 bool IsEmpty(Stack S)
 {
-    if (!S->Size)
-    {
-        return true;
-    }
-    return false;
+    return !S->Size ? true : false;
 }
 
 void Push(Stack S, ElementType input)

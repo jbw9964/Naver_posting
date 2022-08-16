@@ -8,6 +8,10 @@ Stack CreateStack(int capacity)
 {
     Stack temp = (Stack)malloc(sizeof(struct Head));
 
+    if (capacity < 1)
+    {
+        capacity = 1;
+    }
     temp->Capacity = capacity;
     temp->Size = 0;
     temp->Array = (ElementType*)malloc(sizeof(ElementType) * capacity);
@@ -17,19 +21,11 @@ Stack CreateStack(int capacity)
 
 bool IsEmpty(Stack S)
 {
-    if (!S->Size)
-    {
-        return true;
-    }
-    return false;
+    return !S->Size ? true : false;
 }
 bool IsFull(Stack S)
 {
-    if (S->Capacity == S->Size)
-    {
-        return true;
-    }
-    return false;
+    return S->Capacity >= S->Size ? true : false;
 }
 
 void EnhanceCapacity(Stack S)

@@ -69,13 +69,23 @@ void Push(Stack S, ElementType input)
 }
 ElementType Pop(Stack S)
 {
+    if (!S->Size)
+    {
+        printf("Stack is empty. There's nothing to Pop.\n");
+        return false;
+    }
     ElementType value = S->Array[S->Size];
     S->Size--;
     return value;
 }
 ElementType Top(Stack S)
 {
-    return S->Array[S->Size];
+    ElementType temp = Pop(S);
+    if (!(temp == false))
+    {
+        Push(S, temp);
+    }
+    return temp;
 }
 
 void PrintStack(Stack S)

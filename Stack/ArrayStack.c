@@ -81,7 +81,7 @@ ElementType Pop(Stack S)
 ElementType Top(Stack S)
 {
     ElementType temp = Pop(S);
-    if (!(temp == false))
+    if (temp)
     {
         Push(S, temp);
     }

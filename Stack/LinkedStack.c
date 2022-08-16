@@ -6,11 +6,11 @@
 
 Stack CreateStack()
 {
-    Stack temp = (Stack)malloc(sizeof(struct Node));
-    temp->next = NULL;
-    temp->prev = NULL;
-    temp->tail = NULL;
+    Stack temp = (Stack)malloc(sizeof(struct Head));
     temp->Size = 0;
+    temp->item = NULL;
+    temp->tail = NULL;
+
     return temp;
 }
 
@@ -23,57 +23,69 @@ bool IsEmpty(Stack S)
     return false;
 }
 
-void DisposeStack(Stack S)
-{
-    Stack temp = S->tail;
-
-    for (int i = 0; i < S->Size; i++)
-    {
-        temp = temp->prev;
-        free(temp->next);
-    }
-    
-    free(S);
-}
-void MakeEmpty(Stack S)
-{
-    S->Size = 0;
-}
-
 void Push(Stack S, ElementType input)
 {
-    Stack temp = S;
-
-    for (int i = 0; i < S->Size; i++)
+    if (IsEmpty(S))
     {
-        temp = temp->next;
+        S->item = (Item)malloc(sizeof(struct Node));
+        S->item->key = 0;
+        S->item->data = input;
+        S->item->next = NULL;
+
+        S->tail = S->item;
+        S->Size++;
+        return;
     }
 
-    temp->next = (PtrToNode)malloc(sizeof(struct Node));
-    temp->next->prev = temp;
-    temp = temp->next;
-    temp->Item = input;
-    temp->next = NULL;
+    Item temp = S->item;
 
-    S->tail = temp;
+    S->item = (Item)malloc(sizeof(struct Node));
+    S->item->key = 0;
+    S->item->data = input;
+    S->item->next = temp;
+
     S->Size++;
 }
 ElementType Pop(Stack S)
 {
-    ElementType value = S->tail->Item;
+    if (IsEmpty(S))
+    {
+        printf("Stack is empty. There's nothing to Pop.\n");
+        return false;
+    }
 
-    Stack temp = S->tail->prev;
-    S->tail = temp;
-
-    free(temp->next);
-    temp->next = NULL;
+    ElementType value = S->item->data;
+    Item temp = S->item;
+    
+    S->item = temp->next;
+    free(temp);
     S->Size--;
-
     return value;
+
 }
 ElementType Top(Stack S)
 {
-    return S->tail->Item;
+    ElementType temp = Pop(S);
+    if (temp)
+    {
+        Push(S, temp);
+    }
+    return temp;
+}
+
+void MakeEmpty(Stack S)
+{
+    while (IsEmpty(S))
+    {
+        Pop(S);
+    }
+    S->item = NULL;
+    S->tail = NULL;
+}
+void DisposeStack(Stack S)
+{
+    MakeEmpty(S);
+    free(S);
 }
 
 void PrintStack(Stack S)
@@ -84,11 +96,10 @@ void PrintStack(Stack S)
         return;
     }
 
-    Stack temp = S;
-    for(int i = 0; i < S->Size; i++)
+    Item temp = S->item;
+    for (int i = 1; i < S->Size; i++)
     {
+        printf("%d ", temp->data);
         temp = temp->next;
-        printf("%d ", temp->Item);
     }
-    printf("\n");
 }

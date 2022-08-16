@@ -8,16 +8,23 @@ typedef int ElementType;
 struct Node;
 
 typedef struct Node* PtrToNode;
-typedef PtrToNode Stack;
+typedef struct Head* PtrToHead;
+typedef PtrToNode Item;
+typedef PtrToHead Stack;
 
 struct Node
 {
+    ElementType key;
+    ElementType data;
     PtrToNode next;
-    PtrToNode prev;
+};
+
+struct Head
+{
+    int Size;
+    PtrToNode item;
     PtrToNode tail;
 
-    int Size;
-    ElementType Item;
 };
 
 Stack CreateStack();

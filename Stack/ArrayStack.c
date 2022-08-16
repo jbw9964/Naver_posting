@@ -69,7 +69,7 @@ void Push(Stack S, ElementType input)
 }
 ElementType Pop(Stack S)
 {
-    if (!S->Size)
+    if (IsEmpty(S))
     {
         printf("Stack is empty. There's nothing to Pop.\n");
         return false;

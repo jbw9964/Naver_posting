@@ -6,6 +6,7 @@
 
 typedef int ElementType;
 struct Node;
+struct Head;
 
 typedef struct Node* PtrToNode;
 typedef struct Head* PtrToHead;

@@ -22,7 +22,7 @@ Queue CreateQueue(int capacity)
     return temp;
 }
 
-bool Isempty(Queue Q)
+bool IsEmpty(Queue Q)
 {
     return !Q->Size ? true : false;
 }
@@ -77,7 +77,7 @@ void Push(Queue Q, ElementType input)
 }
 ElementType Pop(Queue Q)
 {
-    if (Isempty(Q))
+    if (IsEmpty(Q))
     {
         printf("Queue is empty. There's nothing to Pop.\n");
         return false;
@@ -100,7 +100,7 @@ ElementType Top(Queue Q)
 
 void PrintQueue(Queue Q)
 {
-    if (Isempty(Q))
+    if (IsEmpty(Q))
     {
         printf("Queue is empty.\n");
         return;

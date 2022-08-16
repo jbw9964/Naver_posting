@@ -22,7 +22,7 @@ struct Node
 
 Queue CreateQueue(int capacity);
 
-bool Isempty(Queue Q);
+bool IsEmpty(Queue Q);
 bool IsFull(Queue Q);
 
 void EnhanceCapacity(Queue Q);

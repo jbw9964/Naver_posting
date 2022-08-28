@@ -6,7 +6,7 @@
 
 Stack CreateStack(int capacity)
 {
-    Stack temp = (Stack)malloc(sizeof(struct Head));
+    Stack temp = (Stack)malloc(sizeof(struct Node));
 
     if (capacity < 1)
     {
@@ -30,16 +30,7 @@ bool IsFull(Stack S)
 
 void EnhanceCapacity(Stack S)
 {
-    ElementType* temp_array = (ElementType*)malloc(sizeof(ElementType) * S->Capacity * 2);
-
-    for (int i = 0; i < S->Size; i++)
-    {
-        temp_array[i] = S->Array[i];
-    }
-
-    free(S->Array);
-    S->Array = temp_array;
-    S->Capacity *= 2;
+    S->Array = (ElementType*)realloc(S->Array, sizeof(ElementType) * S->Capacity * 2);
 }
 
 void DisposeStack(Stack S)
@@ -70,7 +61,7 @@ ElementType Pop(Stack S)
         printf("Stack is empty. There's nothing to Pop.\n");
         return false;
     }
-    ElementType value = S->Array[S->Size];
+    ElementType value = S->Array[S->Size - 1];
     S->Size--;
     return value;
 }

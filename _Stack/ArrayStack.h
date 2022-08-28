@@ -5,10 +5,10 @@
 #include <stdbool.h>
 
 typedef int ElementType;
-struct Head;
-typedef struct Head* Stack;
+struct Node;
+typedef struct Node* Stack;
 
-struct Head
+struct Node
 {
     int Capacity;
     int Size;

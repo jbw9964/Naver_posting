@@ -71,7 +71,7 @@ ElementType Top(Stack S)
 
 void MakeEmpty(Stack S)
 {
-    while (IsEmpty(S))
+    while (!IsEmpty(S))
     {
         Pop(S);
     }

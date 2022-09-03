@@ -35,17 +35,23 @@ void EnhanceCapacity(Queue Q)
 {
     ElementType* temp = (ElementType*)malloc(sizeof(ElementType) * Q->Capacity * 2);
 
-    int new_index = 0;
-    int index_count = Q->front;
-    while (new_index < Q->Size)
+    int count = 0;
+    while (!IsEmpty(Q))
     {
-        temp[new_index] = Q->Array[index_count];
-        index_count = (index_count + 1) % Q->Capacity;
-        new_index++;
+        temp[count] = Pop(Q);
     }
 
+    // int new_index = 0;
+    // int index_count = Q->front;
+    // while (new_index < Q->Size)
+    // {
+    //     temp[new_index] = Q->Array[index_count];
+    //     index_count = (index_count + 1) % Q->Capacity;
+    //     new_index++;
+    // }
+
     Q->front = 0;
-    Q->rear = new_index;
+    Q->rear = count;
     free(Q->Array);
     Q->Array = temp;
     Q->Capacity *= 2;

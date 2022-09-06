@@ -31,6 +31,29 @@ bool IsFull(Queue Q)
     return Q->Size >= Q->Capacity ? true : false;
 }
 
+ElementType Pop(Queue Q)
+{
+    if (IsEmpty(Q))
+    {
+        printf("Queue is empty. There's nothing to Pop.\n");
+        return false;
+    }
+
+    ElementType value = Q->Array[Q->front];
+    Q->front = (Q->front + 1) % Q->Capacity;
+    Q->Size--;
+    return value;
+}
+ElementType Top(Queue Q)
+{
+    ElementType temp = Pop(Q);
+    if (temp)
+    {
+        Push(Q, temp);
+    }
+    return temp;
+}
+
 void EnhanceCapacity(Queue Q)
 {
     ElementType* temp = (ElementType*)malloc(sizeof(ElementType) * Q->Capacity * 2);
@@ -80,28 +103,6 @@ void Push(Queue Q, ElementType input)
     Q->Array[Q->rear] = input;
     Q->rear = (Q->rear + 1) % Q->Capacity;
     Q->Size++;
-}
-ElementType Pop(Queue Q)
-{
-    if (IsEmpty(Q))
-    {
-        printf("Queue is empty. There's nothing to Pop.\n");
-        return false;
-    }
-
-    ElementType value = Q->Array[Q->front];
-    Q->front = (Q->front + 1) % Q->Capacity;
-    Q->Size--;
-    return value;
-}
-ElementType Top(Queue Q)
-{
-    ElementType temp = Pop(Q);
-    if (temp)
-    {
-        Push(Q, temp);
-    }
-    return temp;
 }
 
 void PrintQueue(Queue Q)

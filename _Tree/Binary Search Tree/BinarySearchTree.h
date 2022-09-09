@@ -18,6 +18,8 @@ struct Node
 
 Tree CreateBST(ElementType input);
 
+void DisposeBST(Tree T);
+
 Position Find(Tree T, ElementType input);
 
 Tree Insert(Tree T, ElementType input);

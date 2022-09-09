@@ -14,6 +14,25 @@ Tree CreateBST(ElementType input)
     return temp;
 }
 
+void DisposeBST(Tree T)
+{
+    if (!T)
+    {
+        return;
+    }
+    if (T->Left)
+    {
+        DisposeBST(T->Left);
+        free(T->Left);
+    }
+    if (T->Right)
+    {
+        DisposeBST(T->Right);
+        free(T->Right);
+    }
+    free(T);
+    T = NULL;
+}
 Position Find(Tree T, ElementType input)
 {
     if (!T)
@@ -59,16 +78,38 @@ Tree Delete(Tree T, ElementType input)
     }
     else if (input < T->data)
     {
-        return Delete(T->Left, input);
+        T->Left = Delete(T->Left, input);
     }
     else if (input > T->data)
     {
-        return Delete(T->Right, input);
+        T->Right = Delete(T->Right, input);
     }
     else
     {
-        return T;
+        if (!T->Left && !T->Right)      // has no child
+        {
+            DisposeBST(T);
+            T = NULL;
+            return NULL;
+        }
+        else if (T->Left && T->Right)   // has both child
+        {
+            T->data = T->Right->data;
+            T->Right = Delete(T->Right, T->Right->data);
+        }
+        else if (T->Left)               // has left child
+        {
+            T->data = T->Left->data;
+            free(T->Left);
+        }
+        else                            // has right child
+        {
+            T->data = T->Right->data;
+            free(T->Right);
+        }
     }
+
+    return T;
 }
 
 void Print_PreOrder(Tree T)

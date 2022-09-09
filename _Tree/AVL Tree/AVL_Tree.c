@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "AVL_Tree_new.h"
+#include "AVL_Tree.h"
 
 int ReturnMax(int input_1, int input_2)
 {
